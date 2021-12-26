@@ -1,6 +1,6 @@
-# Elytra AutoPilot 1.17.x
+# Elytra AutoPilot
 
-**This mod requires [Cloth Config](https://www.curseforge.com/minecraft/mc-mods/cloth-config) and [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api).**
+**This mod requires [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api).**
 ***
 This is a fork of Simonlourson's client [auto-flight mod](https://www.curseforge.com/minecraft/mc-mods/elytra-auto-flight), updated for 1.17 and added many additional utilities.
 
