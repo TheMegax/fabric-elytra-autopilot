@@ -26,6 +26,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -110,11 +111,11 @@ public class ElytraAutoPilot implements ClientModInitializer {
                 }
 
                 World world = player.world;
-                Vec3d clientPos = player.getPos();
+                Vec3i clientPos = player.getBlockPos();
                 int l = world.getTopY();
                 int n = 2;
-                double c = clientPos.getY();
-                for (double i = c; i < l; i++) {
+                int c = clientPos.getY();
+                for (int i = c; i < l; i++) {
                     BlockPos blockPos = new BlockPos(clientPos.getX(), clientPos.getY() + n, clientPos.getZ());
                     if (!world.getBlockState(blockPos).isAir()) {
                         player.sendMessage(Text.translatable("text." + MODID + ".takeoffFail.clearSkyNeeded").formatted(Formatting.RED), true);
