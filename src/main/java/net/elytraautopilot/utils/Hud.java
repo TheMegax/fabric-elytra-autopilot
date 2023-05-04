@@ -8,6 +8,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -48,8 +49,8 @@ public class Hud {
             }
             World world = player.world;
             int l = world.getBottomY();
-            Vec3d clientPos = player.getPos();
-            for (double i = clientPos.getY(); i > l; i--) {
+            Vec3i clientPos = player.getBlockPos();
+            for (int i = clientPos.getY(); i > l; i--) {
                 BlockPos blockPos = new BlockPos(clientPos.getX(), i, clientPos.getZ());
                 if (world.getBlockState(blockPos).isSolidBlock(world, blockPos)) {
                     groundheight = clientPos.getY() - i;
