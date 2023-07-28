@@ -1,8 +1,6 @@
 package net.elytraautopilot;
 
 import com.terraformersmc.modmenu.ModMenu;
-import me.lortseam.completeconfig.gui.ConfigScreenBuilder;
-import me.lortseam.completeconfig.gui.cloth.ClothConfigScreenBuilder;
 import net.elytraautopilot.commands.ClientCommands;
 import net.elytraautopilot.config.ModConfig;
 import net.elytraautopilot.utils.Hud;
@@ -31,7 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ElytraAutoPilot implements ClientModInitializer {
-    private static final String MODID = "elytraautopilot";
+    public static final String MODID = "elytraautopilot";
     public static final Logger LOGGER = LoggerFactory.getLogger("ElytraAutoPilot");
     private static boolean configPressed = false;
     private static boolean landPressed = false;
@@ -65,9 +63,14 @@ public class ElytraAutoPilot implements ClientModInitializer {
     public static boolean doGlide = false;
     public static double distance = 0f;
     public static double groundheight;
-    private ModConfig config = null;
 
-	@Override
+    private static final ModConfig config = new ModConfig(MODID);
+
+    public static ModConfig getConfig() {
+        return config;
+    }
+
+    @Override
 	public void onInitializeClient() {
         minecraftClient = MinecraftClient.getInstance();
 
@@ -75,12 +78,9 @@ public class ElytraAutoPilot implements ClientModInitializer {
         HudRenderCallback.EVENT.register((matrixStack, tickDelta) -> ElytraAutoPilot.this.onScreenTick());
         ClientTickEvents.END_CLIENT_TICK.register(e -> this.onClientTick());
 
-        config = new ModConfig(MODID);
+        //config = new ModConfig(MODID);
         config.load();
 
-        if (FabricLoader.getInstance().isModLoaded("cloth-config")) {
-            ConfigScreenBuilder.setMain(MODID, new ClothConfigScreenBuilder());
-        }
         ClientCommands.register(minecraftClient);
     }
 
@@ -109,13 +109,13 @@ public class ElytraAutoPilot implements ClientModInitializer {
                     return;
                 }
 
-                World world = player.world;
+                World world = player.getWorld();
                 Vec3d clientPos = player.getPos();
                 int l = world.getTopY();
                 int n = 2;
                 double c = clientPos.getY();
                 for (double i = c; i < l; i++) {
-                    BlockPos blockPos = new BlockPos(clientPos.getX(), clientPos.getY() + n, clientPos.getZ());
+                    BlockPos blockPos = BlockPos.ofFloored(clientPos.getX(), clientPos.getY() + n, clientPos.getZ());
                     if (!world.getBlockState(blockPos).isAir()) {
                         player.sendMessage(Text.translatable("text." + MODID + ".takeoffFail.clearSkyNeeded").formatted(Formatting.RED), true);
                         return;

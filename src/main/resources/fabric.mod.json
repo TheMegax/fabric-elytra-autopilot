@@ -10,6 +10,17 @@
     "TheMegax",
     "LouisLOurson"
   ],
+  "contributors": [
+    "401U",
+    "Johannes7k75",
+    "ubionexd",
+    "averycrespi",
+    "LQ1234",
+    "vadimpronin",
+    "HumanoidSandvichDispenser",
+    "Cookie_n00b",
+    "RazrCraft"
+  ],
   "contact": {
     "homepage": "https://github.com/TheMegax/fabric-elytra-autopilot",
     "sources": "https://github.com/TheMegax/fabric-elytra-autopilot"
@@ -22,6 +33,9 @@
   "entrypoints": {
     "client" : [
       "net.elytraautopilot.ElytraAutoPilot"
+    ],
+    "modmenu": [
+      "net.elytraautopilot.config.ModMenuIntegration"
     ]
   },
   "mixins": [
@@ -29,12 +43,17 @@
   ],
 
   "depends": {
-    "fabricloader": ">=0.14.9",
+    "fabricloader": ">=0.14.21",
     "fabric-api": "*",
-    "minecraft": "~1.19",
+    "minecraft": "~1.20",
     "java": ">=17"
   },
   "suggests": {
     "flamingo": "*"
+  },
+  "custom": {
+    "modmenu": {
+      "update_checker": false
+    }
   }
 }
